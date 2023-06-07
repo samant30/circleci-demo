@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@1.2.0
+
+jobs:
+  build:
+    executor: docker/default
+
+    steps:
+      - checkout
+
+        # Build Docker image
+      - docker/build:
+          context: .
+          dockerfile: Dockerfile
+          image: circleci/node:10
+
+ 
