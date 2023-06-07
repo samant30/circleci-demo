@@ -7,12 +7,13 @@ jobs:
       
     steps:
       - checkout
+      - setup_remote_docker
       
       # Build Docker image
       - run:
           name: Build Docker image
           command: |
-            docker build -t app -f /home/innobit/circleci-demo/env/dev/Dockerfile . 
+            docker build -t app -f env/dev/Dockerfile . 
 
 workflows:
   version: 2
