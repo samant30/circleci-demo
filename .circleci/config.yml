@@ -3,9 +3,14 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.2.0
 
+executers:
+  default:
+   docker:
+    - image: circleci/node:10
+
 jobs:
   build: #can be any name you choose
-    executor: docker/default
+    executor: default
 
     steps:
       - checkout
