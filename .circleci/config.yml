@@ -22,6 +22,31 @@ jobs:
        name: Build Docker image
        command: |
         docker build -t app -f env/dev/Dockerfile . 
+    
+    - run:
+          name: Install AWS CLI
+          command: |
+            sudo apt-get update && sudo apt-get install -y awscli
+
+    # Authenticate Docker client to AWS ECR
+
+    - run:
+       name: Authenticate Docker client
+       command: |
+        aws ecr get-login-password --region <your-aws-region> | docker login --username AWS --password-stdin <your-aws-account-id>.dkr.ecr.<your-aws-region>.amazonaws.com
+
+    # Tag Docker image
+    - run:
+       name: Tag Docker image
+       command: |
+        docker tag app:latest <your-aws-account-id>.dkr.ecr.<your-aws-region>.amazonaws.com/<your-ecr-repository>:latest
+
+    # Push Docker image to AWS ECR
+    - run:
+       name: Push Docker image to AWS ECR
+       command: |
+        docker push <your-aws-account-id>.dkr.ecr.<your-aws-region>.amazonaws.com/<your-ecr-repository>:latest
+
 
 workflows:
   version: 2
