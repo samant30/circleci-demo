@@ -1,24 +1,18 @@
 version: 2.1
 
-orbs:
-  docker: circleci/docker@1.2.0
-
-executers:
-  default:
-   docker:
-    - image: circleci/node:10
-
 jobs:
-  build: #can be any name you choose
-    executor: default
-
+  build:
+    docker:
+      - image: circleci/node:10
+      
     steps:
       - checkout
-
-        # Build Docker image
-      - docker/build:
-          dockerfile: Dockerfile
-          image: circleci/node:10
+      
+      # Build Docker image
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t app -f /home/innobit/circleci-demo/env/dev . 
 
 workflows:
   version: 2
@@ -30,5 +24,3 @@ filters:
   branches:
     only:
       - main
-
- 
