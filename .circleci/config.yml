@@ -26,10 +26,10 @@ jobs:
 workflows:
   version: 2
   build-and-deploy:
-    jobs:
-      - build
+   jobs:
+    - build
 
-filters:
+ filters:
   branches:
-    only:
-      - main
+   only:
+    - main
