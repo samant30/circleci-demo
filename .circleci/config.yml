@@ -1,16 +1,17 @@
 version: 2.1
 orbs:
  node: circleci/node@5.1.0
- executors:
+
+executors:
   default: # Define the executor
-  docker:
-   - image: circleci/node:10 # Use the desired Node.js version
+   docker:
+    - image: circleci/node:10 # Use the desired Node.js version
 
  
 
 jobs:
   build:
-   executer: node-app/default      
+   executer: node/default      
    steps:
     - checkout
     - setup_remote_docker
