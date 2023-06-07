@@ -4,7 +4,7 @@ orbs:
   docker: circleci/docker@1.2.0
 
 jobs:
-  build:
+  build: #can be any name you choose
     executor: docker/default
 
     steps:
@@ -12,8 +12,18 @@ jobs:
 
         # Build Docker image
       - docker/build:
-          context: .
           dockerfile: Dockerfile
           image: circleci/node:10
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+
+filters:
+  branches:
+    only:
+      - main
 
  
