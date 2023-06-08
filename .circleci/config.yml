@@ -30,9 +30,9 @@ jobs:
        command: |
         aws configure set aws_access_key_id $accesskey
         aws configure set aws_secret_access_key $secret_key
-        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 734411915629.dkr.ecr.us-east-1.amazonaws.com
-        docker tag ishika:latest 734411915629.dkr.ecr.us-east-1.amazonaws.com/ishika:latest
-        docker push 734411915629.dkr.ecr.us-east-1.amazonaws.com/ishika:latest
+        aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 734411915629.dkr.ecr.ap-south-1.amazonaws.com
+        docker tag ishika:latest 734411915629.dkr.ecr.ap-south-1.amazonaws.com/ishika:latest
+        docker push 734411915629.dkr.ecr.ap-south-1.amazonaws.com/ishika:latest
     #- run:
        #name: SSH into EC2 instance
        #command: |
