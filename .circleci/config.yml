@@ -8,16 +8,12 @@ executors:
    docker:
     - image: circleci/node:10 # Use the desired Node.js version
 
- 
-
 jobs:
-  build:
-   executor: node/default      
+  build:      
    steps:
     - checkout
     - setup_remote_docker
       
-    # Build Docker image
     - run:
        name: Build Docker image
        command: |
@@ -28,8 +24,6 @@ jobs:
           command: |
             sudo apt-get update && sudo apt-get install -y awscli
 
-    # Authenticate Docker client to AWS ECR
-
     - run:
        name: Authenticate Docker client
        command: |
@@ -37,14 +31,11 @@ jobs:
         aws configure set aws_secret_access_key $secret_key
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 734411915629.dkr.ecr.us-east-1.amazonaws.com
 
-    # Tag Docker image
     - run:
        name: Tag Docker image
        command: |
         docker tag ishika:latest 734411915629.dkr.ecr.us-east-1.amazonaws.com/ishika:latest
         
-
-    # Push Docker image to AWS ECR
     - run:
        name: Push Docker image to AWS ECR
        command: |
@@ -54,8 +45,6 @@ jobs:
        name: SSH into EC2 instance
        command: |
         ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 'touch /home/ec2-user/innobit.txt'
-
-
 
 workflows:
   version: 2
