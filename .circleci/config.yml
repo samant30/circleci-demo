@@ -45,7 +45,7 @@ jobs:
     - run:
        name: SSH into EC2 instance
        command: |
-        ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 'touch /home/ec2-user/innobit.txt'
+        ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 './backend.sh'
 
 workflows:
   version: 2
