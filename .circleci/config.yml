@@ -34,19 +34,29 @@ jobs:
         aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 734411915629.dkr.ecr.ap-south-1.amazonaws.com
         docker tag ishika:latest 734411915629.dkr.ecr.ap-south-1.amazonaws.com/ishika:latest
         docker push 734411915629.dkr.ecr.ap-south-1.amazonaws.com/ishika:latest
+  deploy:
+    executor: default 
+    steps:
     - run:
        name: SSH into EC2 instance
        command: |
         ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 './backend-ish.sh'
 
 workflows: 
-  version: 2
+  version: 2.1
   build-and-deploy:
    jobs:
-    - build
+    - build:
+        filters:
+          branches:
+           only:
+            - main
+    - deploy:
+        filters:
+          branches:
+           only:
+            - main
 
-filters:
-  branches:
-   only:
-    - main 
+             
+
 
