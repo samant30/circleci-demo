@@ -6,7 +6,7 @@ orbs:
 executors:
   default: # Define the executor
    docker:
-    - image: circleci/node:10 # Use the desired Node.js version
+    - image: circleci/node:10 # Ue the desired Node.js version
 
 jobs:
   build:
