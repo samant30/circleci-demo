@@ -10,7 +10,8 @@ executors:
 
 jobs:
   build:
-   executor: node/default
+   docker:
+    - image: circleci/python:3.9
    steps:
     - checkout
     - setup_remote_docker
