@@ -1,14 +1,14 @@
 version: 2.1
 
 orbs:
- node: circleci/node@5.1.0
- aws-cli: circleci/aws-cli@4.0.0
+  node: circleci/node@5.1.0
+  aws-cli: circleci/aws-cli@4.0.0
 
 
 executors:
   default: # Define the executor
    docker:
-   - image: circleci/node:10 # Use the desired Node.js 
+   - image: circleci/node:10 # Use the desired Node.js version
 
 jobs:
   build:
@@ -54,6 +54,16 @@ workflows:
           branches:
            only:
             - main
+            
+    - hold:
+        type: approval
+        requires:
+          - build
+        filters:
+          branches:
+            only:
+              - main
+
     - deploy:
         requires:
           - build
