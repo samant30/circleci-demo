@@ -7,8 +7,8 @@ orbs:
 
 executors:
   default: # Define the executor
-    docker:
-      - image: circleci/node:10 # Use the desired Node.js 
+   docker:
+   - image: circleci/node:10 # Use the desired Node.js 
 
 jobs:
   build:
@@ -41,9 +41,9 @@ jobs:
     executor: default 
     steps:
     - run:
-        name: SSH into EC2 instance
-        command: |
-          ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 './backend-ish.sh'
+       name: SSH into EC2 instance
+       command: |
+        ssh -o StrictHostKeyChecking=no ec2-user@13.126.123.251 './backend-ish.sh'
 
 workflows: 
   version: 2.1
@@ -61,7 +61,3 @@ workflows:
           branches:
            only:
             - main
-
-             
-
-
